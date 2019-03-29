@@ -8,7 +8,15 @@ import './App.css';
 
 class App extends Component {
   state = {
-    posts: {}
+    posts: {},
+    blog: {}
+  }
+
+  componentDidMount () {
+    //imitating fetch here
+    this.setState({
+      blog: [...blog]
+    })
   }
 
   addPosts = (url) => {
@@ -16,7 +24,7 @@ class App extends Component {
     let blogFiltered =
       (url === '/blog') ?
         blog :
-        blog.filter(post => post.url === url)
+        blog.filter(post => post.url === url);
 
     blogFiltered.map((post, index) => {
       newPosts = {...newPosts, [post.url]: post}
@@ -29,6 +37,8 @@ class App extends Component {
   }
 
   render() {
+    let {blog} = this.state;
+    if (Object.keys(blog).length === 0) return null;
     return (
       <Router>
         <div className="App">
